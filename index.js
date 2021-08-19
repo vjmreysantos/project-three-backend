@@ -1,11 +1,25 @@
 import express from 'express'
 
+import { port } from './config/environment.js'
+import { connectToDatabase } from './db/helpers.js'
+import router from './config/router.js'
+
 const app = express()
 
-const port = 4000
+app.use(express.json())
+app.use('/', router)
 
-app.listen(port, () => {
-  console.log(`🤖 app is listening on port ${port}`)
-})
+async function startServer() {
+  try {
+    await connectToDatabase()
+    console.log('Database Connected')
+    app.listen(port, () => {
+      console.log(`🤖 app is listening on port ${port}`)
+    })
+  } catch (err) {
+    console.log('Something went wrong')
+    console.log(err)
+  }
+}
+startServer()
 
-// is the commit system still working
