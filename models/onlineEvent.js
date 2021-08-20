@@ -9,9 +9,9 @@ const onlineEventSchema = new mongoose.Schema(
     category: [{ type: String, required: true }],
     date: { type: Date, required: true },
     meetingLink: { type: String, required: true },
-    attendees: [{}],
-    groups: [{}],
-    createdBy: {},
+    attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
+    groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group', required: true }],
+    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
     comments: [{ Comments }],
   }
 )
