@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Comments from './comment'
+import commentSchema from './comment.js'
 
 const locationSchema = new mongoose.Schema(
   {
@@ -22,7 +22,7 @@ const eventSchema = new mongoose.Schema(
     attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
     groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group', required: true }],
     createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-    comments: [{ Comments }],
+    comments: [ commentSchema ],
   }
 )
 

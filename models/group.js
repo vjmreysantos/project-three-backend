@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Comments from './comment.js'
+import commentSchema from './comment.js'
 
 const groupSchema = new mongoose.Schema(
   {
@@ -7,11 +7,11 @@ const groupSchema = new mongoose.Schema(
     image: { type: String, required: true },
     description: { type: String, required: true, maxlength: 500 },
     category: [{ type: String, required: true }],
-    members: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
-    events: [{ type: mongoose.Schema.ObjectId, ref: 'Event', required: true }],
+    members: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    events: [{ type: mongoose.Schema.ObjectId, ref: 'Event' }],
     location: { type: String },
-    comments: [{ Comments }],
-    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+    comments: [ commentSchema ],
+    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   }
 )
 
