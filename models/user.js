@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
     avatar: { type: String, required: true },
     house: { type: String, required: true },
     details: { detailsSchema },
-    events: [{}],
+    events: [{ type: mongoose.Schema.ObjectId, ref: 'Event', required: true }],
     isAdmin: { type: Boolean, default: false },
   }
 )
