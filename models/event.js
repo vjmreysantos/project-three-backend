@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Comments from './comment'
 
 const locationSchema = new mongoose.Schema(
   {
@@ -21,6 +22,7 @@ const eventSchema = new mongoose.Schema(
     attendees: [{}],
     groups: [{}],
     createdBy: {},
+    comments: [{ Comments }],
   }
 )
 

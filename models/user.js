@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import mongooseUniqueValidator from 'mongoose-unique-validator'
 
+
 const detailsSchema = new mongoose.Schema(
   {
     patronus: { type: String },
@@ -24,11 +25,69 @@ const userSchema = new mongoose.Schema(
     avatar: { type: String, required: true },
     house: { type: String, required: true },
     details: { detailsSchema },
-    groups: [{}],
     events: [{}],
     isAdmin: { type: Boolean, default: false },
   }
 )
+
+userSchema
+  .virtual('joinedEvent', {
+    ref: 'Event',
+    localField: '_id',
+    foreignField: 'attendees',
+  })
+  .get(function(joinedEvent) {
+    if (!joinedEvent) return
+
+    return joinedEvent.map(event => {
+      return {
+        _id: event.id,
+        name: event.name,
+        image: event.image,
+        location: event.location,
+        attendees: event.attendees,
+        category: event.category,
+        group: event.groups,
+        createdBy: event.createdBy,
+      }
+    })
+  })
+
+userSchema
+  .virtual('createdEvent', {
+    ref: 'Event',
+    localField: '_id',
+    foreignField: 'createdBy',
+  })
+
+userSchema
+  .virtual('joinedGroup', {
+    ref: 'Group',
+    localField: '_id',
+    foreignField: 'members',
+  })
+  .get(function(joinedGroup) {
+    if (!joinedGroup) return
+
+    return joinedGroup.map(group => {
+      return {
+        _id: group.id,
+        name: group.name,
+        image: group.image,
+        events: group.events,
+        location: group.location,
+        members: group.members,
+        category: group.category,
+      }
+    })
+  })
+
+userSchema
+  .virtual('createdGroup', {
+    ref: 'Group',
+    localField: '_id',
+    foreignField: 'addedBy',
+  })
 
 userSchema.set('toJSON', 
   {

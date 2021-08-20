@@ -7,7 +7,7 @@ const groupSchema = new mongoose.Schema(
     image: { type: String, required: true },
     description: { type: String, required: true, maxlength: 500 },
     category: [{ type: String, required: true }],
-    users: [{}],
+    members: [{}],
     events: [{}],
     location: { type: String },
     comments: [{ Comments }],

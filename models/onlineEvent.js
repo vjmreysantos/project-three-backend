@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Comments from './comment'
 
 const onlineEventSchema = new mongoose.Schema(
   {
@@ -11,6 +12,7 @@ const onlineEventSchema = new mongoose.Schema(
     attendees: [{}],
     groups: [{}],
     createdBy: {},
+    comments: [{ Comments }],
   }
 )
 
