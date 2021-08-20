@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String },
     avatar: { type: String, required: true },
     house: { type: String, required: true },
     details: { detailsSchema },
@@ -91,6 +91,7 @@ userSchema
 
 userSchema.set('toJSON', 
   {
+    virtuals: true,
     transform(_doc, json) {
       delete json.password
       return json
@@ -106,7 +107,7 @@ userSchema
 
 userSchema
   .pre('validate', function(next) {
-    if (this.isModified('password') && this.password !== this.passwordConfirmation) {
+    if (this.isModified('password') && this.password !== this._passwordConfirmation) {
       this.invalidate('passwordConfirmation', 'does not match')
     }
     next()

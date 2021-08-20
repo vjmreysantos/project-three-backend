@@ -7,4 +7,9 @@ router.route('/users')
   .get(users.userIndex)
   .post(users.createUser)
 
-  export default router
+router.route('/users/:userId')
+  .get(users.showUser)
+  .put(users.editUser)
+  .delete(users.deleteUser)
+
+export default router
