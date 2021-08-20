@@ -2,6 +2,7 @@ import express from 'express'
 import users from '../controllers/users.js'
 import groups from '../controllers/groups.js'
 import events from '../controllers/events.js'
+import onlineEvents from '../controllers/onlineEvents.js'
 
 const router = express.Router()
 
@@ -38,6 +39,17 @@ router.route('/events/:eventId')
   .get(events.eventShow)
   .put(events.eventEdit)
   .delete(events.eventDelete)
+
+// REQUESTS FOR ONLINE EVENTS
+
+router.route('/online-events')
+  .post(onlineEvents.createOnlineEvent)
+  .get(onlineEvents.onlineEventIndex)
+
+router.route('/online-events/:onlineEventId')
+  .get(onlineEvents.onlineEventShow)
+  .put(onlineEvents.onlineEventEdit)
+  .delete(onlineEvents.onlineEventDelete)
 
 
 export default router
