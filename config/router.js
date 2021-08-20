@@ -1,6 +1,7 @@
 import express from 'express'
 import users from '../controllers/users.js'
 import groups from '../controllers/groups.js'
+import events from '../controllers/events.js'
 
 const router = express.Router()
 
@@ -26,6 +27,17 @@ router.route('/groups/:groupId')
   .get(groups.groupShow)
   .put(groups.groupEdit)
   .delete(groups.groupDelete)
+
+// REQUESTS FOR EVENTS
+
+router.route('/events')
+  .post(events.createEvent)
+  .get(events.eventIndex)
+
+router.route('/events/:eventId')  
+  .get(events.eventShow)
+  .put(events.eventEdit)
+  .delete(events.eventDelete)
 
 
 export default router

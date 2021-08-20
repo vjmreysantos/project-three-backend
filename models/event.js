@@ -18,10 +18,10 @@ const eventSchema = new mongoose.Schema(
     description: { type: String, required: true,  maxlength: 500 },
     category: [{ type: String, required: true }],
     date: { type: Date, required: true },
-    location: { locationSchema, required: true },
-    attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
-    groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group', required: true }],
-    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+    location: { locationSchema },
+    attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }],
+    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
     comments: [ commentSchema ],
   }
 )
