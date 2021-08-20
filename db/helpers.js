@@ -1,5 +1,7 @@
 import mongoose  from 'mongoose'
-import { dbURI } from '../config/environment.js'
+import dotenv from 'dotenv'
+dotenv.config()
+export const dbURI = process.env.DB_URI
 
 export const connectToDatabase = () => {
   const options = {
