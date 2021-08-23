@@ -3,6 +3,7 @@ import users from '../controllers/users.js'
 import groups from '../controllers/groups.js'
 import events from '../controllers/events.js'
 import onlineEvents from '../controllers/onlineEvents.js'
+import auth from '../controllers/auth.js'
 // import comments from '../controllers/comments.js'
 
 const router = express.Router()
@@ -17,6 +18,13 @@ router.route('/users/:userId')
   .get(users.showUser)
   .put(users.editUser)
   .delete(users.deleteUser)
+
+router.route('/register')
+  .post(auth.registerUser)
+
+router.route('/login')
+  .post(auth.loginUser)
+
 
 
 // REQUESTS FOR GROUPS
@@ -54,7 +62,5 @@ router.route('/online-events/:onlineEventId')
   .put(onlineEvents.onlineEventEdit)
   .delete(onlineEvents.onlineEventDelete)
   // .post(comments.createComment)
-
-
 
 export default router
