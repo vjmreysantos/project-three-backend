@@ -1,11 +1,12 @@
 import OnlineEvent from '../models/onlineEvent.js'
+import { NotFound } from '../lib/errors.js'
 
 async function createOnlineEvent(req, res, next) {
   try {
     const newOnlineEvent = await OnlineEvent.create(req.body)
     return res.status(201).json(newOnlineEvent)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -14,7 +15,7 @@ async function onlineEventIndex(req, res, next) {
     const onlineEvents = await OnlineEvent.find()
     return res.status(200).json(onlineEvents)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -22,7 +23,7 @@ async function onlineEventShow (req, res, next) {
   const { onlineEventId } = req.params
   try {
     const foundOnlineEvent = await OnlineEvent.findById(onlineEventId)
-    if (!foundOnlineEvent) throw new Error()
+    if (!foundOnlineEvent) throw new NotFound()
     return res.status(200).json(foundOnlineEvent)
   } catch (err) {
     next(err)
@@ -34,7 +35,7 @@ async function onlineEventEdit(req, res, next) {
   try {
     const onlineEventToUpdate = await OnlineEvent.findById(onlineEventId)
     if (!onlineEventToUpdate) {
-      throw new Error()
+      throw new NotFound()
     }
     Object.assign(onlineEventToUpdate, req.body)
     await onlineEventToUpdate.save()
@@ -49,7 +50,7 @@ async function onlineEventDelete(req, res, next) {
   try {
     const onlineEventToDelete = await OnlineEvent.findById(onlineEventId)
     if (!onlineEventToDelete) {
-      throw new Error()
+      throw new NotFound()
     }
     await onlineEventToDelete.remove()
     return res.sendStatus(204)

@@ -1,11 +1,12 @@
 import Event from '../models/event.js'
+import { NotFound } from '../lib/errors.js'
 
 async function createEvent(req, res, next) {
   try {
     const newEvent = await Event.create(req.body)
     return res.status(201).json(newEvent)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -14,7 +15,7 @@ async function eventIndex(req, res, next) {
     const events = await Event.find()
     return res.status(200).json(events)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -22,7 +23,9 @@ async function eventShow (req, res, next) {
   const { eventId } = req.params
   try {
     const foundEvent = await Event.findById(eventId)
-    if (!foundEvent) throw new Error()
+    if (!foundEvent) {
+      throw new NotFound()
+    }
     return res.status(200).json(foundEvent)
   } catch (err) {
     next(err)
@@ -34,7 +37,7 @@ async function eventEdit(req, res, next) {
   try {
     const eventToUpdate = await Event.findById(eventId)
     if (!eventToUpdate) {
-      throw new Error()
+      throw new NotFound()
     }
     Object.assign(eventToUpdate, req.body)
     await eventToUpdate.save()
@@ -49,7 +52,7 @@ async function eventDelete(req, res, next) {
   try {
     const eventToDelete = await Event.findById(eventId)
     if (!eventToDelete) {
-      throw new Error()
+      throw new NotFound()
     }
     await eventToDelete.remove()
     return res.sendStatus(204)

@@ -1,11 +1,12 @@
 import User from '../models/user.js'
+import { NotFound } from '../lib/errors.js'
 
 async function createUser(req, res, next) {
   try {
     const newUser = await User.create(req.body)
     return res.status(201).json(newUser)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -14,7 +15,7 @@ async function userIndex(req, res, next) {
     const users = await User.find()
     return res.status(200).json(users)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -22,7 +23,7 @@ async function userShow (req, res, next) {
   const { userId } = req.params
   try {
     const foundUser = await User.findById(userId)
-    if (!foundUser) throw new Error()
+    if (!foundUser) throw new NotFound()
     return res.status(200).json(foundUser)
   } catch (err) {
     next(err)
@@ -34,7 +35,7 @@ async function userEdit(req, res, next) {
   try {
     const userToUpdate = await User.findById(userId)
     if (!userToUpdate) {
-      throw new Error()
+      throw new NotFound()
     }
     Object.assign(userToUpdate, req.body)
     await userToUpdate.save()
@@ -49,7 +50,7 @@ async function userDelete(req, res, next) {
   try {
     const userToDelete = await User.findById(userId)
     if (!userToDelete) {
-      throw new Error()
+      throw new NotFound()
     }
     await userToDelete.remove()
     return res.sendStatus(204)
