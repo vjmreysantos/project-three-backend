@@ -59,10 +59,50 @@ async function onlineEventDelete(req, res, next) {
   }
 }
 
+async function createOnlineEventComment(req, res, next) {
+  const { onlineEventId } = req.params
+  try {
+    const commentedOnlineEvent = await OnlineEvent.findById(onlineEventId)
+    if (!commentedOnlineEvent) {
+      throw new NotFound()
+    }
+    console.log(commentedOnlineEvent)
+    commentedOnlineEvent.comments.push(req.body)
+    await commentedOnlineEvent.save()
+    return res.status(201).json(commentedOnlineEvent)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function deleteOnlineEventComment(req, res, next) {
+  const { onlineEventId, commentId } = req.params
+  try {
+    const onlineEvent = await OnlineEvent.findById(onlineEventId)
+    if (!onlineEvent) {
+      throw new NotFound()
+    }
+    const commentToDelete = onlineEvent.comments.id(commentId)
+    if (!commentToDelete) {
+      throw new NotFound()
+    }
+    commentToDelete.remove()
+    await onlineEvent.save()
+    return res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+
 export default {
   createOnlineEvent: createOnlineEvent,
   onlineEventIndex: onlineEventIndex,
   onlineEventShow: onlineEventShow,
   onlineEventEdit: onlineEventEdit,
   onlineEventDelete: onlineEventDelete,
+  createOnlineEventComment: createOnlineEventComment,
+  deleteOnlineEventComment: deleteOnlineEventComment,
+  
 }

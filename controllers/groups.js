@@ -59,10 +59,47 @@ async function groupDelete(req, res, next) {
   }
 }
 
+async function createGroupComment(req, res, next) {
+  const { groupId } = req.params
+  try {
+    const commentedGroup = await Group.findById(groupId)
+    if (!commentedGroup) {
+      throw new NotFound()
+    }
+    console.log(commentedGroup)
+    commentedGroup.comments.push(req.body)
+    await commentedGroup.save()
+    return res.status(201).json(commentedGroup)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function deleteGroupComment(req, res, next) {
+  const { groupId, commentId } = req.params
+  try {
+    const group = await Group.findById(groupId)
+    if (!group) {
+      throw new NotFound()
+    }
+    const commentToDelete = group.comments.id(commentId)
+    if (!commentToDelete) {
+      throw new NotFound()
+    }
+    commentToDelete.remove()
+    await group.save()
+    return res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
 export default {
   createGroup: createGroup,
   groupIndex: groupIndex,
   groupShow: groupShow,
   groupEdit: groupEdit,
   groupDelete: groupDelete,
+  createGroupComment: createGroupComment,
+  deleteGroupComment: deleteGroupComment,
 }

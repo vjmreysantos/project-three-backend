@@ -62,10 +62,49 @@ async function eventDelete(req, res, next) {
 }
 
 
+async function createEventComment(req, res, next) {
+  const { eventId } = req.params
+  try {
+    const commentedEvent = await Event.findById(eventId)
+    if (!commentedEvent) {
+      throw new NotFound()
+    }
+    console.log(commentedEvent)
+    commentedEvent.comments.push(req.body)
+    await commentedEvent.save()
+    return res.status(201).json(commentedEvent)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function deleteEventComment(req, res, next) {
+  const { eventId, commentId } = req.params
+  try {
+    const event = await Event.findById(eventId)
+    if (!event) {
+      throw new NotFound()
+    }
+    const commentToDelete = event.comments.id(commentId)
+    if (!commentToDelete) {
+      throw new NotFound()
+    }
+    commentToDelete.remove()
+    await event.save()
+    return res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+
 export default {
   createEvent: createEvent,
   eventIndex: eventIndex,
   eventShow: eventShow,
   eventEdit: eventEdit,
   eventDelete: eventDelete,
+  createEventComment: createEventComment,
+  deleteEventComment: deleteEventComment,
 }

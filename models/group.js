@@ -1,5 +1,15 @@
 import mongoose from 'mongoose'
-import commentSchema from './comment.js'
+
+const commentSchema = new mongoose.Schema(
+  {
+    text: { type: String, required: true, maxlength: 240 },
+    rating: { type: Number, min: 1, max: 5 },
+    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  },
+  {
+    timestamps: true,
+  }
+)
 
 const groupSchema = new mongoose.Schema(
   {
