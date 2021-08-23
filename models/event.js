@@ -33,7 +33,7 @@ const eventSchema = new mongoose.Schema(
     location: { locationSchema },
     attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }],
-    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
     comments: [ commentSchema ],
   }
 )

@@ -1,9 +1,10 @@
 import Group from '../models/group.js'
-import { NotFound } from '../lib/errors.js'
+import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function createGroup(req, res, next) {
+  const { currentUser } = req
   try {
-    const newGroup = await Group.create(req.body)
+    const newGroup = await Group.create({ ...req.body, addedby: currentUser })
     return res.status(201).json(newGroup)
   } catch (err) {
     next(err)
@@ -32,10 +33,14 @@ async function groupShow (req, res, next) {
 
 async function groupEdit(req, res, next) {
   const { groupId } = req.params
+  const { currentUserId } = req
   try {
     const groupToUpdate = await Group.findById(groupId)
     if (!groupToUpdate) {
       throw new NotFound()
+    }
+    if (!groupToUpdate.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     Object.assign(groupToUpdate, req.body)
     await groupToUpdate.save()
@@ -47,10 +52,14 @@ async function groupEdit(req, res, next) {
 
 async function groupDelete(req, res, next) {
   const { groupId } = req.params
+  const { currentUserId } = req
   try {
     const groupToDelete = await Group.findById(groupId)
     if (!groupToDelete) {
       throw new NotFound()
+    }
+    if (!groupToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     await groupToDelete.remove()
     return res.sendStatus(204)
@@ -61,13 +70,14 @@ async function groupDelete(req, res, next) {
 
 async function createGroupComment(req, res, next) {
   const { groupId } = req.params
+  const { currentUser } = req
   try {
     const commentedGroup = await Group.findById(groupId)
     if (!commentedGroup) {
       throw new NotFound()
     }
-    console.log(commentedGroup)
-    commentedGroup.comments.push(req.body)
+    const createdComment = commentedGroup.comments.create({ ...req.body, addedBy: currentUser })
+    commentedGroup.comments.push(createdComment)
     await commentedGroup.save()
     return res.status(201).json(commentedGroup)
   } catch (err) {
@@ -77,6 +87,7 @@ async function createGroupComment(req, res, next) {
 
 async function deleteGroupComment(req, res, next) {
   const { groupId, commentId } = req.params
+  const { currentUserId } = req
   try {
     const group = await Group.findById(groupId)
     if (!group) {
@@ -85,6 +96,9 @@ async function deleteGroupComment(req, res, next) {
     const commentToDelete = group.comments.id(commentId)
     if (!commentToDelete) {
       throw new NotFound()
+    }
+    if (!commentToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     commentToDelete.remove()
     await group.save()

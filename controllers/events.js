@@ -1,9 +1,10 @@
 import Event from '../models/event.js'
-import { NotFound } from '../lib/errors.js'
+import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function createEvent(req, res, next) {
+  const { currentUser } = req
   try {
-    const newEvent = await Event.create(req.body)
+    const newEvent = await Event.create({ ...req.body, addedBy: currentUser })
     return res.status(201).json(newEvent)
   } catch (err) {
     next(err)
@@ -34,10 +35,14 @@ async function eventShow (req, res, next) {
 
 async function eventEdit(req, res, next) {
   const { eventId } = req.params
+  const { currentUserId } = req
   try {
     const eventToUpdate = await Event.findById(eventId)
     if (!eventToUpdate) {
       throw new NotFound()
+    }
+    if (!eventToUpdate.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     Object.assign(eventToUpdate, req.body)
     await eventToUpdate.save()
@@ -49,10 +54,14 @@ async function eventEdit(req, res, next) {
 
 async function eventDelete(req, res, next) {
   const { eventId } = req.params
+  const { currentUserId } = req
   try {
     const eventToDelete = await Event.findById(eventId)
     if (!eventToDelete) {
       throw new NotFound()
+    }
+    if (!eventToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     await eventToDelete.remove()
     return res.sendStatus(204)
@@ -64,13 +73,14 @@ async function eventDelete(req, res, next) {
 
 async function createEventComment(req, res, next) {
   const { eventId } = req.params
+  const { currentUser } = req
   try {
     const commentedEvent = await Event.findById(eventId)
     if (!commentedEvent) {
       throw new NotFound()
     }
-    console.log(commentedEvent)
-    commentedEvent.comments.push(req.body)
+    const createdComment = commentedEvent.comments.create({ ...req.body, addedBy: currentUser })
+    commentedEvent.comments.push(createdComment)
     await commentedEvent.save()
     return res.status(201).json(commentedEvent)
   } catch (err) {
@@ -80,6 +90,7 @@ async function createEventComment(req, res, next) {
 
 async function deleteEventComment(req, res, next) {
   const { eventId, commentId } = req.params
+  const { currentUserId } = req
   try {
     const event = await Event.findById(eventId)
     if (!event) {
@@ -88,6 +99,9 @@ async function deleteEventComment(req, res, next) {
     const commentToDelete = event.comments.id(commentId)
     if (!commentToDelete) {
       throw new NotFound()
+    }
+    if (!commentToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     commentToDelete.remove()
     await event.save()

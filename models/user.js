@@ -48,7 +48,7 @@ userSchema
         attendees: event.attendees,
         category: event.category,
         group: event.groups,
-        createdBy: event.createdBy,
+        addedBy: event.addedBy,
       }
     })
   })
@@ -57,7 +57,7 @@ userSchema
   .virtual('createdEvent', {
     ref: 'Event',
     localField: '_id',
-    foreignField: 'createdBy',
+    foreignField: 'addedBy',
   })
 
 userSchema
