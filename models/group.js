@@ -21,7 +21,7 @@ const groupSchema = new mongoose.Schema(
     events: [{ type: mongoose.Schema.ObjectId, ref: 'Event' }],
     location: { type: String },
     comments: [ commentSchema ],
-    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   }
 )
 
