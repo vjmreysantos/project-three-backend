@@ -1,7 +1,7 @@
   export default [
     {
       name: 'Harry Potter Movies Club First Meet-up',
-      image: https://static.wikia.nocookie.net/harrypotter/images/7/7d/Slug.jpg/revision/latest?cb=20081117184155,
+      image: 'https://static.wikia.nocookie.net/harrypotter/images/7/7d/Slug.jpg/revision/latest?cb=20081117184155',
       description: 'Initial meet-up for fans of the movies',
       category: ['Movies', 'Food', 'Drinks'],
       date: '2021-08-29-17-00-00',
