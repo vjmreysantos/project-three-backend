@@ -24,6 +24,8 @@ async function eventShow (req, res, next) {
   const { eventId } = req.params
   try {
     const foundEvent = await Event.findById(eventId)
+      .populate('addedBy')
+      .populate('comments.addedBy')
     if (!foundEvent) {
       throw new NotFound()
     }
@@ -111,6 +113,30 @@ async function deleteEventComment(req, res, next) {
   }
 }
 
+async function attendEvent(req, res, next) {
+  const { eventId } = req.params
+  const { currentUserId, currentUser } = req
+  try {
+    const eventToAttend = await Event.findById(eventId).populate('attendees')
+
+    if (!eventToAttend) {
+      throw new NotFound()
+    }
+
+    if (eventToAttend.attendees.find(user => currentUserId.equals(user._id))) {
+      eventToAttend.attendees.remove(currentUserId)
+    } else {
+      eventToAttend.attendees.push(currentUser)
+    }
+
+    await eventToAttend.save()
+
+    return res.status(202).json(eventToAttend)
+  } catch (err) {
+    next(err)
+  }
+}
+
 
 
 export default {
@@ -121,4 +147,5 @@ export default {
   eventDelete: eventDelete,
   createEventComment: createEventComment,
   deleteEventComment: deleteEventComment,
+  attendEvent: attendEvent,
 }

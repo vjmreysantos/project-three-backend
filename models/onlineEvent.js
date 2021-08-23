@@ -26,6 +26,6 @@ const onlineEventSchema = new mongoose.Schema(
   }
 )
 
-const OnlineEvent = mongoose.model('onlineEvent', onlineEventSchema)
+const OnlineEvent = mongoose.model('OnlineEvent', onlineEventSchema)
 
 export default OnlineEvent

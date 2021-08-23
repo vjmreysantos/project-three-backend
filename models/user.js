@@ -61,6 +61,36 @@ userSchema
   })
 
 userSchema
+  .virtual('joinedOnlineEvent', {
+    ref: 'OnlineEvent',
+    localField: '_id',
+    foreignField: 'attendees',
+  })
+  .get(function(joinedOnlineEvent) {
+    if (!joinedOnlineEvent) return
+
+    return joinedOnlineEvent.map(onlineEvent => {
+      return {
+        _id: onlineEvent.id,
+        name: onlineEvent.name,
+        image: onlineEvent.image,
+        meetingLink: onlineEvent.meetingLink,
+        attendees: onlineEvent.attendees,
+        category: onlineEvent.category,
+        group: onlineEvent.groups,
+        addedBy: onlineEvent.addedBy,
+      }
+    })
+  })
+
+userSchema
+  .virtual('createdOnlineEvent', {
+    ref: 'OnlineEvent',
+    localField: '_id',
+    foreignField: 'addedBy',
+  })
+
+userSchema
   .virtual('joinedGroup', {
     ref: 'Group',
     localField: '_id',

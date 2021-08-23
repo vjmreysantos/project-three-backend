@@ -23,6 +23,12 @@ async function userShow (req, res, next) {
   const { userId } = req.params
   try {
     const foundUser = await User.findById(userId)
+      .populate('joinedEvent')
+      // .populate('joinedOnlineEvent')
+      .populate('createdEvent')
+      .populate('createdOnlineEvent')
+      .populate('joinedGroup')
+      .populate('createdGroup')
     if (!foundUser) throw new NotFound()
     return res.status(200).json(foundUser)
   } catch (err) {
