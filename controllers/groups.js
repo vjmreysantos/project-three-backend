@@ -4,7 +4,7 @@ import { NotFound, Unauthorized } from '../lib/errors.js'
 async function createGroup(req, res, next) {
   const { currentUser } = req
   try {
-    const newGroup = await Group.create({ ...req.body, addedby: currentUser })
+    const newGroup = await Group.create({ ...req.body, addedBy: currentUser })
     return res.status(201).json(newGroup)
   } catch (err) {
     next(err)
