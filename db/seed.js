@@ -5,8 +5,8 @@ import User from '../models/user.js'
 import userData from './data/users.js'
 import Group from '../models/group.js'
 import groupData from './data/groups.js'
-// import OnlineEvent from '../models/onlineEvent.js'
-// import onlineEventData from './data/onlineEvents.js'
+import OnlineEvent from '../models/onlineEvent.js'
+import onlineEventData from './data/onlineEvents.js'
 import { connectToDatabase, truncateDatabase, disconnectDatabase } from './helpers.js'
 
 async function seed() {
@@ -26,8 +26,8 @@ async function seed() {
     const group = await Group.create(groupData)
     console.log(`${group.length} Group added to the database`)
 
-    // const onlineEvent = await OnlineEvent.create(onlineEventData)
-    // console.log(`${onlineEvent.length} Online Event added to the database`)
+    const onlineEvent = await OnlineEvent.create(onlineEventData)
+    console.log(`${onlineEvent.length} Online Event added to the database`)
 
     console.log('Goodbye')
   } catch (err) {
