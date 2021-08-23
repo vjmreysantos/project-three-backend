@@ -110,6 +110,30 @@ async function deleteOnlineEventComment(req, res, next) {
   }
 }
 
+async function attendOnlineEvent(req, res, next) {
+  const { onlineEventId } = req.params
+  const { currentUserId, currentUser } = req
+  try {
+    const onlineEventToAttend = await OnlineEvent.findById(onlineEventId).populate('attendees')
+
+    if (!onlineEventToAttend) {
+      throw new NotFound()
+    }
+
+    if (onlineEventToAttend.attendees.find(user => currentUserId.equals(user._id))) {
+      onlineEventToAttend.attendees.remove(currentUserId)
+    } else {
+      onlineEventToAttend.attendees.push(currentUser)
+    }
+
+    await onlineEventToAttend.save()
+
+    return res.status(202).json(onlineEventToAttend)
+  } catch (err) {
+    next(err)
+  }
+}
+
 
 
 export default {
@@ -120,5 +144,5 @@ export default {
   onlineEventDelete: onlineEventDelete,
   createOnlineEventComment: createOnlineEventComment,
   deleteOnlineEventComment: deleteOnlineEventComment,
-  
+  attendOnlineEvent: attendOnlineEvent,
 }

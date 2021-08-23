@@ -110,6 +110,30 @@ async function deleteGroupComment(req, res, next) {
   }
 }
 
+async function joinGroup(req, res, next) {
+  const { groupId } = req.params
+  const { currentUserId, currentUser } = req
+  try {
+    const groupToJoin = await Group.findById(groupId).populate('members')
+
+    if (!groupToJoin) {
+      throw new NotFound()
+    }
+
+    if (groupToJoin.members.find(user => currentUserId.equals(user._id))) {
+      groupToJoin.members.remove(currentUserId)
+    } else {
+      groupToJoin.members.push(currentUser)
+    }
+
+    await groupToJoin.save()
+
+    return res.status(202).json(groupToJoin)
+  } catch (err) {
+    next(err)
+  }
+}
+
 export default {
   createGroup: createGroup,
   groupIndex: groupIndex,
@@ -118,4 +142,5 @@ export default {
   groupDelete: groupDelete,
   createGroupComment: createGroupComment,
   deleteGroupComment: deleteGroupComment,
+  joinGroup: joinGroup,
 }
