@@ -1,9 +1,10 @@
 import OnlineEvent from '../models/onlineEvent.js'
-import { NotFound } from '../lib/errors.js'
+import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function createOnlineEvent(req, res, next) {
+  const { currentUser } = req
   try {
-    const newOnlineEvent = await OnlineEvent.create(req.body)
+    const newOnlineEvent = await OnlineEvent.create({ ...req.body, addedBy: currentUser })
     return res.status(201).json(newOnlineEvent)
   } catch (err) {
     next(err)
@@ -32,10 +33,14 @@ async function onlineEventShow (req, res, next) {
 
 async function onlineEventEdit(req, res, next) {
   const { onlineEventId } = req.params
+  const { currentUserId } = req
   try {
     const onlineEventToUpdate = await OnlineEvent.findById(onlineEventId)
     if (!onlineEventToUpdate) {
       throw new NotFound()
+    }
+    if (!onlineEventToUpdate.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     Object.assign(onlineEventToUpdate, req.body)
     await onlineEventToUpdate.save()
@@ -47,10 +52,14 @@ async function onlineEventEdit(req, res, next) {
 
 async function onlineEventDelete(req, res, next) {
   const { onlineEventId } = req.params
+  const { currentUserId } = req
   try {
     const onlineEventToDelete = await OnlineEvent.findById(onlineEventId)
     if (!onlineEventToDelete) {
       throw new NotFound()
+    }
+    if (!onlineEventToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     await onlineEventToDelete.remove()
     return res.sendStatus(204)
@@ -61,13 +70,14 @@ async function onlineEventDelete(req, res, next) {
 
 async function createOnlineEventComment(req, res, next) {
   const { onlineEventId } = req.params
+  const { currentUser } = req
   try {
     const commentedOnlineEvent = await OnlineEvent.findById(onlineEventId)
     if (!commentedOnlineEvent) {
       throw new NotFound()
     }
-    console.log(commentedOnlineEvent)
-    commentedOnlineEvent.comments.push(req.body)
+    const createdComment = commentedOnlineEvent.comments.create({ ...req.body, addedBy: currentUser })
+    commentedOnlineEvent.comments.push(createdComment)
     await commentedOnlineEvent.save()
     return res.status(201).json(commentedOnlineEvent)
   } catch (err) {
@@ -77,6 +87,7 @@ async function createOnlineEventComment(req, res, next) {
 
 async function deleteOnlineEventComment(req, res, next) {
   const { onlineEventId, commentId } = req.params
+  const { currentUserId } = req
   try {
     const onlineEvent = await OnlineEvent.findById(onlineEventId)
     if (!onlineEvent) {
@@ -85,6 +96,9 @@ async function deleteOnlineEventComment(req, res, next) {
     const commentToDelete = onlineEvent.comments.id(commentId)
     if (!commentToDelete) {
       throw new NotFound()
+    }
+    if (!commentToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
     }
     commentToDelete.remove()
     await onlineEvent.save()
