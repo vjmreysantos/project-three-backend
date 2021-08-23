@@ -1,11 +1,12 @@
 import Group from '../models/group.js'
+import { NotFound } from '../lib/errors.js'
 
 async function createGroup(req, res, next) {
   try {
     const newGroup = await Group.create(req.body)
     return res.status(201).json(newGroup)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -14,7 +15,7 @@ async function groupIndex(req, res, next) {
     const groups = await Group.find()
     return res.status(200).json(groups)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -22,7 +23,7 @@ async function groupShow (req, res, next) {
   const { groupId } = req.params
   try {
     const foundGroup = await Group.findById(groupId)
-    if (!foundGroup) throw new Error()
+    if (!foundGroup) throw new NotFound()
     return res.status(200).json(foundGroup)
   } catch (err) {
     next(err)
@@ -34,7 +35,7 @@ async function groupEdit(req, res, next) {
   try {
     const groupToUpdate = await Group.findById(groupId)
     if (!groupToUpdate) {
-      throw new Error()
+      throw new NotFound()
     }
     Object.assign(groupToUpdate, req.body)
     await groupToUpdate.save()
@@ -49,7 +50,7 @@ async function groupDelete(req, res, next) {
   try {
     const groupToDelete = await Group.findById(groupId)
     if (!groupToDelete) {
-      throw new Error()
+      throw new NotFound()
     }
     await groupToDelete.remove()
     return res.sendStatus(204)

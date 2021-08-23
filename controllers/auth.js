@@ -1,5 +1,5 @@
 import User from '../models/user.js'
-// import { Unauthorized } from '../lib/errors.js'
+import { Unauthorized } from '../lib/errors.js'
 import jwt from 'jsonwebtoken'
 import { secret } from '../config/environment.js'
 
@@ -18,7 +18,7 @@ async function loginUser(req, res, next) {
   try {
     const userToLogin = await User.findOne({ email: req.body.email })
     if (!userToLogin || !userToLogin.validatePassword(req.body.password)) {
-      throw new Error()
+      throw new Unauthorized()
     }
     const token = jwt.sign({ sub: userToLogin._id }, secret, { expiresIn: '7 days' })
     return res.status(202).json({
