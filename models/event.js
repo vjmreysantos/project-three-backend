@@ -3,6 +3,7 @@ import commentSchema from './comment.js'
 
 const locationSchema = new mongoose.Schema(
   {
+    placeName: { type: String },
     streetNumber: { type: Number, required: true },
     streetName: { type: String, required: true },
     postcode: { type: String, required: true },
