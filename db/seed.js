@@ -16,6 +16,30 @@ async function seed() {
 
     await truncateDatabase()
     console.log('Database Dropped')
+
+    const adminUser = await User.create({
+      username: 'admin',
+      email: 'admin@email.com',
+      password: 'admin',
+      passwordConfirmation: 'admin',
+      avatar: 'image.jpg',
+      house: 'Gryffindor',
+      isAdmin: true,
+    })
+
+    console.log('🤖 Admin user created')
+
+    eventData.forEach(event => {
+      event.addedBy = adminUser
+    })
+
+    onlineEventData.forEach(onlineEvent => {
+      onlineEvent.addedBy = adminUser
+    })
+
+    groupData.forEach(group => {
+      group.addedBy = adminUser
+    })
     
     const user = await User.create(userData)
     console.log(`${user.length} User added to the database`)
