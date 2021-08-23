@@ -21,7 +21,7 @@ const onlineEventSchema = new mongoose.Schema(
     meetingLink: { type: String, required: true },
     attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }],
-    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+    addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
     comments: [ commentSchema ],
   }
 )
