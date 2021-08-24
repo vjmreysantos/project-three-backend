@@ -12,16 +12,16 @@ const commentSchema = new mongoose.Schema(
   }
 )
 
-const locationSchema = new mongoose.Schema(
-  {
-    placeName: { type: String },
-    streetNumber: { type: Number, required: true },
-    streetName: { type: String, required: true },
-    postcode: { type: String, required: true },
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
-  }
-)
+// const locationSchema = new mongoose.Schema(
+//   {
+//     placeName: { type: String },
+//     streetNumber: { type: Number, required: true },
+//     streetName: { type: String, required: true },
+//     postcode: { type: String, required: true },
+//     latitude: { type: Number, required: true },
+//     longitude: { type: Number, required: true },
+//   }
+// )
 
 const eventSchema = new mongoose.Schema(
   {
@@ -30,7 +30,15 @@ const eventSchema = new mongoose.Schema(
     description: { type: String, required: true,  maxlength: 500 },
     category: [{ type: String, required: true }],
     date: { type: Date, required: true },
-    location: { locationSchema },
+    location: {
+      placeName: { type: String },
+      streetNumber: { type: Number, required: true },
+      streetName: { type: String, required: true },
+      postcode: { type: String, required: true },
+      latitude: { type: Number, required: true },
+      longitude: { type: Number, required: true },
+    },
+    // location: [ locationSchema ],
     attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     // groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }],
     addedBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },

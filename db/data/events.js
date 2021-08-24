@@ -11,7 +11,7 @@ export default [
       streetName: 'King\'s Rd',
       postcode: 'SW3 4PL',
       latitude: 51.488480,
-      longitude: -0.165870
+      longitude: -0.165870,
     },
     // attendees: '',
     // groups: '',
