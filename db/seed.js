@@ -22,7 +22,7 @@ async function seed() {
       email: 'admin@email.com',
       password: 'admin',
       passwordConfirmation: 'admin',
-      avatar: 'image.jpg',
+      avatar: 'https://t3.ftcdn.net/jpg/01/89/89/72/360_F_189897283_h5JyxhL6OyiQ71MIfzGVN0VJPIw0g4fE.jpg',
       house: 'Gryffindor',
       isAdmin: true,
     })

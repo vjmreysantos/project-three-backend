@@ -26,12 +26,13 @@ router.route('/login')
   .post(auth.loginUser)
 
 
-
 // REQUESTS FOR GROUPS
 
 router.route('/groups')
-  .post(secureRoute, groups.createGroup)
   .get(groups.groupIndex)
+
+router.route('/groups/new-group') 
+  .post(secureRoute, groups.createGroup) 
 
 router.route('/groups/:groupId')
   .get(groups.groupShow)
@@ -43,11 +44,15 @@ router.route('/groups/:groupId')
 router.route('/groups/:groupId/:commentId')
   .delete(secureRoute, groups.deleteGroupComment)
 
+
+
 // REQUESTS FOR EVENTS
 
 router.route('/events')
-  .post(secureRoute, events.createEvent)
   .get(events.eventIndex)
+
+router.route('/events/new-event')
+  .post(secureRoute, events.createEvent)
 
 router.route('/events/:eventId')  
   .get(events.eventShow)
