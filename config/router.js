@@ -30,8 +30,10 @@ router.route('/login')
 // REQUESTS FOR GROUPS
 
 router.route('/groups')
-  .post(secureRoute, groups.createGroup)
   .get(groups.groupIndex)
+
+router.route('/groups/new-group') 
+  .post(secureRoute, groups.createGroup) 
 
 router.route('/groups/:groupId')
   .get(groups.groupShow)
