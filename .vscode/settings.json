@@ -1,0 +1,11 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#851111",
+    "titleBar.activeBackground": "#851111",
+    "titleBar.inactiveBackground": "#851111",
+    "statusBar.foreground": "#000",
+    "titleBar.inactiveForeground": "#000",
+    "titleBar.activeForeground": "#000",
+  },
+  "window.title": "Muggles Backend"
+}

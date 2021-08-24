@@ -17,7 +17,7 @@ const onlineEventSchema = new mongoose.Schema(
     image: { type: String, required: true },
     description: { type: String, required: true,  maxlength: 500 },
     category: [{ type: String, required: true }],
-    date: { type: Date, required: true },
+    date: { type: String, format: Date, required: true },
     meetingLink: { type: String, required: true },
     attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }],
