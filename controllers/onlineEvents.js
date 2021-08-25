@@ -26,6 +26,7 @@ async function onlineEventShow (req, res, next) {
     const foundOnlineEvent = await OnlineEvent.findById(onlineEventId)
       .populate('addedBy')
       .populate('comments.addedBy')
+      .populate('attendees')
     if (!foundOnlineEvent) throw new NotFound()
     return res.status(200).json(foundOnlineEvent)
   } catch (err) {

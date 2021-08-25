@@ -26,6 +26,7 @@ async function eventShow (req, res, next) {
     const foundEvent = await Event.findById(eventId)
       .populate('addedBy')
       .populate('comments.addedBy')
+      .populate('attendees')
     if (!foundEvent) {
       throw new NotFound()
     }
