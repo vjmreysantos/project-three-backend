@@ -24,7 +24,7 @@ async function userShow (req, res, next) {
   try {
     const foundUser = await User.findById(userId)
       .populate('joinedEvent')
-      // .populate('joinedOnlineEvent')
+      .populate('joinedOnlineEvent')
       .populate('createdEvent')
       .populate('createdOnlineEvent')
       .populate('joinedGroup')
