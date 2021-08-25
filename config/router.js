@@ -41,10 +41,8 @@ router.route('/groups/:groupId')
   .get(groups.groupShow)
   .put(secureRoute, groups.groupEdit)
   .delete(secureRoute, groups.groupDelete)
-  .post(secureRoute, groups.createGroupComment)
-
-router.route('/groups/:groupId/join')  
   .post(secureRoute, groups.joinGroup)
+  .post(secureRoute, groups.createGroupComment)
 
 router.route('/groups/:groupId/:commentId')
   .delete(secureRoute, groups.deleteGroupComment)
