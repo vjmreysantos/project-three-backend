@@ -70,8 +70,10 @@ router.route('/events/:eventId/:commentId')
 // REQUESTS FOR ONLINE EVENTS
 
 router.route('/online-events')
-  .post(secureRoute, onlineEvents.createOnlineEvent)
   .get(onlineEvents.onlineEventIndex)
+
+router.route('/online-events/new-online-event')  
+  .post(secureRoute, onlineEvents.createOnlineEvent)
 
 router.route('/online-events/:onlineEventId')
   .get(onlineEvents.onlineEventShow)
