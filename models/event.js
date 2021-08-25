@@ -29,7 +29,8 @@ const eventSchema = new mongoose.Schema(
     image: { type: String, required: true },
     description: { type: String, required: true,  maxlength: 500 },
     category: [{ type: String, required: true }],
-    date: { type: Date, required: true },
+    date: { type: String, format: Date, required: true },
+    time: { type: String, required: true },
     location: {
       placeName: { type: String },
       streetNumber: { type: Number, required: true },

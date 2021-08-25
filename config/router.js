@@ -42,12 +42,10 @@ router.route('/groups/:groupId')
   .put(secureRoute, groups.groupEdit)
   .delete(secureRoute, groups.groupDelete)
   .post(secureRoute, groups.joinGroup)
-  .post(secureRoute, groups.createGroupComment)
-
-router.route('/groups/:groupId/:commentId')
   .delete(secureRoute, groups.deleteGroupComment)
 
-
+router.route('/groups/:groupId/create-comment')
+  .post(secureRoute, groups.createGroupComment)
 
 // REQUESTS FOR EVENTS
 
@@ -61,16 +59,14 @@ router.route('/events/:eventId')
   .get(events.eventShow)
   .put(secureRoute, events.eventEdit)
   .delete(secureRoute, events.eventDelete)
-  // .post(secureRoute, events.createEventComment)
   .post(secureRoute, events.attendEvent)
 
 router.route('/events/:eventId/create-comment')
   .post(secureRoute, events.createEventComment)
   
-  
-
 router.route('/events/:eventId/:commentId')
   .delete(secureRoute, events.deleteEventComment)
+
 
 // REQUESTS FOR ONLINE EVENTS
 
@@ -85,6 +81,8 @@ router.route('/online-events/:onlineEventId')
   .put(secureRoute, onlineEvents.onlineEventEdit)
   .delete(secureRoute, onlineEvents.onlineEventDelete)
   .post(secureRoute, onlineEvents.attendOnlineEvent)
+
+router.route('/online-events/:onlineEventId/create-comment')
   .post(secureRoute, onlineEvents.createOnlineEventComment)
   
 
