@@ -61,8 +61,13 @@ router.route('/events/:eventId')
   .get(events.eventShow)
   .put(secureRoute, events.eventEdit)
   .delete(secureRoute, events.eventDelete)
+  // .post(secureRoute, events.createEventComment)
   .post(secureRoute, events.attendEvent)
+
+router.route('/events/:eventId/create-comment')
   .post(secureRoute, events.createEventComment)
+  
+  
 
 router.route('/events/:eventId/:commentId')
   .delete(secureRoute, events.deleteEventComment)
