@@ -25,6 +25,9 @@ router.route('/register')
 router.route('/login')
   .post(auth.loginUser)
 
+router.route('/profile')
+  .get(secureRoute, auth.userProfile)
+
 
 // REQUESTS FOR GROUPS
 

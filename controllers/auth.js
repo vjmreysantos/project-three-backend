@@ -30,7 +30,20 @@ async function loginUser(req, res, next) {
   }
 }
 
+async function userProfile(req, res) {
+  const { currentUserId } = req
+  const user = await User.findById(currentUserId)
+    .populate('joinedEvent')
+    .populate('joinedOnlineEvent')
+    .populate('createdEvent')
+    .populate('createdOnlineEvent')
+    .populate('joinedGroup')
+    .populate('createdGroup')
+  return res.status(200).json(user)
+}
+
 export default {
   registerUser: registerUser,
   loginUser: loginUser,
+  userProfile: userProfile,
 }
