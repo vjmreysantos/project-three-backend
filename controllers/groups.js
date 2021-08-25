@@ -26,6 +26,7 @@ async function groupShow (req, res, next) {
     const foundGroup = await Group.findById(groupId)
       .populate('addedBy')
       .populate('comments.addedBy')
+      .populate('members')
     if (!foundGroup) throw new NotFound()
     return res.status(200).json(foundGroup)
   } catch (err) {
