@@ -71,7 +71,7 @@ export default [
   },
   {
     name: 'Triwizard Cups',
-    image: 'https://static.wikia.nocookie.net/harrypotterfanon/images/8/8f/Triwizard_Cup.jpg/revision/latest?cb=20160323003933',
+    image: 'https://cdnb.artstation.com/p/assets/images/images/035/327/685/medium/justine-spanevello-triwizardtrophy.jpg?1614691030',
     description: 'For Wizards with cups full of booze!',
     category: 'Drinks',
     // members: [''],

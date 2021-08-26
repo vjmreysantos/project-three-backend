@@ -121,7 +121,7 @@ export default [
     image: 'https://stadiumjourney.com/wp-content/uploads/2020/04/quidditch-pitch-aerial.jpg',
     description: 'Are you a Chaser, Keeper, Beater or Seeker? Whichever your strength is, unleash the beast inside you and join us for a virtual match!',
     category: ['Sports'],
-    date: '2021-04-30',
+    date: '2022-04-30',
     time: '17:30',
     meetingLink: 'https://zoom.us/672893fnslkegn948',
     // attendees: [''],
