@@ -13,9 +13,7 @@ export default [
       latitude: 51.488480,
       longitude: -0.165870,
     },
-    // attendees: '',
-    // groups: '',
-    // createdBy: '',
+    // attendees:
   },
   {
     name: 'Hogwarts Express',

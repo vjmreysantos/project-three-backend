@@ -47,6 +47,8 @@ async function seed() {
     const event = await Event.create(eventData)
     console.log(`${event.length} Event added to the database`)
 
+    
+
     const group = await Group.create(groupData)
     console.log(`${group.length} Group added to the database`)
 
