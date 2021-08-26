@@ -5,6 +5,7 @@ export default [
     description: 'Put on your witchiest wig and ride your broomstick to the pub.',
     category: ['magic', 'drinks'],
     date: '2021-09-01',
+    time: '21:00',
     location: {
       placeName: 'Chelsea Potter',
       streetNumber: 119,
@@ -21,6 +22,7 @@ export default [
     description: 'Join us at Platform 9 3/4 and we\'ll hop on the Hogwarts Express for a ride with food and drinks.',
     category: ['food', 'drinks'],
     date: '2021-10-01',
+    time: '14:30',
     location: {
       placeName: 'King\'s Cross',
       streetNumber: 0,
@@ -39,6 +41,7 @@ export default [
     description: 'It\'s Bingo Time!',
     category: ['food', 'drinks'],
     date: '2021-10-31',
+    time: '19:30',
     location: {
       placeName: 'The Elephant House',
       streetNumber: 21,
@@ -57,6 +60,7 @@ export default [
     description: 'The quidditch season is coming to an end. Come support the teams in the final match!',
     category: ['sports'],
     date: '2021-09-16',
+    time: '14:00',
     location: {
       placeName: 'Richmond Park',
       streetNumber: 0,
@@ -75,6 +79,7 @@ export default [
     description: 'Regular meet up of the Gryffindor Brentford Bees supporters to watch the match.',
     category: ['sports'],
     date: '2021-09-11',
+    time: '17:00',
     location: {
       placeName: 'Hare and Hounds',
       streetNumber: 214,
@@ -93,6 +98,7 @@ export default [
     description: 'Meet us for a Potter-themed trivia night. Will last month\'s winners, The Prefects, have a repeat victory? Will the Granger Zone finally get the win? Will we have a new winner?',
     category: ['drinks'],
     date: '2021-09-02',
+    time: '19:00',
     location: {
       placeName: 'Ladywell Tavern',
       streetNumber: 80,
@@ -111,6 +117,7 @@ export default [
     description: 'This month we\'re gathering to discuss all things Half-Blood Prince!',
     category: ['drinks'],
     date: '2021-09-09',
+    time: '19:30',
     location: {
       placeName: 'King Charles I',
       streetNumber: 55,
@@ -129,6 +136,7 @@ export default [
     description: 'Nighttime cycle through the park. We\'ll meet at Ham House and take a cycle around Richmond Park.',
     category: ['sports'],
     date: '2021-09-16',
+    time: '20:30',
     location: {
       placeName: 'Ham House',
       streetNumber: 0,
