@@ -3,19 +3,19 @@ import bcrypt from 'bcrypt'
 import mongooseUniqueValidator from 'mongoose-unique-validator'
 
 
-const detailsSchema = new mongoose.Schema(
-  {
-    patronus: { type: String },
-    wand: { type: String },
-    friends: [{ type: String }],
-    foes: [{ type: String }],
-    animagus: { type: String },
-    pet: { type: String },
-    favoriteSubject: { type: String },
-    quidditchTeam: { type: String },
-    favoriteSweet: { type: String },
-  }
-)
+// const detailsSchema = new mongoose.Schema(
+//   {
+//     patronus: { type: String },
+//     wand: { type: String },
+//     friends: [{ type: String }],
+//     foes: [{ type: String }],
+//     animagus: { type: String },
+//     pet: { type: String },
+//     favoriteSubject: { type: String },
+//     quidditchTeam: { type: String },
+//     favoriteSweet: { type: String },
+//   }
+// )
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,7 +24,20 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     avatar: { type: String, required: true },
     house: { type: String, required: true },
-    details: { detailsSchema },
+    details: {
+      patronus: { type: String },
+      wand: { 
+        core: { type: String },
+        wood: { type: String },
+      },
+      friends: [{ type: String }],
+      foes: [{ type: String }],
+      animagus: { type: String },
+      pet: { type: String },
+      favoriteSubject: { type: String },
+      quidditchTeam: { type: String },
+      favoriteSweet: { type: String },
+    },
     events: [{ type: mongoose.Schema.ObjectId, ref: 'Event', required: true }],
     isAdmin: { type: Boolean, default: false },
   }
