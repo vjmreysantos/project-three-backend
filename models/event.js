@@ -33,7 +33,7 @@ const eventSchema = new mongoose.Schema(
     time: { type: String, required: true },
     location: {
       placeName: { type: String },
-      streetNumber: { type: Number, required: true },
+      streetNumber: { type: Number },
       streetName: { type: String, required: true },
       postcode: { type: String, required: true },
       latitude: { type: Number, required: true },

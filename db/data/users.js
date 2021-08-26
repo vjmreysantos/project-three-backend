@@ -33,7 +33,7 @@ export default [
     email: 'LoonyLuna@email.com',
     password: 'LoonyLuna',
     passwordConfirmation: 'LoonyLuna',
-    avatar: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FLuna_Lovegood&psig=AOvVaw0mOQmLCYmcxkQTP8Gxs519&ust=1629629910410000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCJia0-H6wfICFQAAAAAdAAAAABAD',
+    avatar: 'https://img.buzzfeed.com/buzzfeed-static/static/2019-12/16/18/tmp/97bd170a1e02/tmp-name-2-287-1576521508-0_dblbig.jpg?resize=1200:*',
     house: 'Ravenclaw',
     details: {
       patronus: 'Hare',
@@ -60,7 +60,7 @@ export default [
     email: 'Hagrid200@email.com',
     password: 'Hagrid200',
     passwordConfirmation: 'Hagrid200',
-    avatar: 'https://static.wikia.nocookie.net/pottermore/images/1/10/Hagrid.png/revision/latest?cb=20120602114716',
+    avatar: 'https://i.pinimg.com/originals/03/07/cb/0307cb5f0e4ad7a7756f3f46926fc16f.jpg',
     house: 'Gryffindor',
     details: {
       patronus: 'Horse',
@@ -86,7 +86,7 @@ export default [
     email: 'BellaLestrange@email.com',
     password: 'BellaLestrange',
     passwordConfirmation: 'BellaLestrange',
-    avatar: 'https://static.wikia.nocookie.net/heroes-villains/images/7/7f/Bellatrix_Strange.jpg/revision/latest/scale-to-width-down/250?cb=20140903194732',
+    avatar: 'https://i.pinimg.com/originals/c5/98/4a/c5984ada87cd711cb1db7bd96a2e5f34.jpg',
     house: 'Slytherin',
     details: {
       patronus: 'Wolf',
@@ -108,10 +108,10 @@ export default [
     },
   },
   {
-    username: 'DobbyIsFree',
-    email: 'DobbyIsFree@email.com',
-    password: 'DobbyIsFree',
-    passwordConfirmation: 'DobbyIsFree',
+    username: 'FreeDobby',
+    email: 'FreeDobby@email.com',
+    password: 'FreeDobby',
+    passwordConfirmation: 'FreeDobby',
     avatar: 'https://images.ctfassets.net/usf1vwtuqyxm/6miaYuD2i4wemokq8Q02Uo/ba922817407a667349ae64c8e334d3b6/Dobby_WB_F2_DobbyClickingFingersCastingSpell_Still_080615_Land.jpg',
     house: 'Gryffindor',
     details: {
@@ -138,7 +138,7 @@ export default [
     email: 'HufflepuffStan@email.com',
     password: 'HufflepuffStan',
     passwordConfirmation: 'HufflepuffStan',
-    avatar: 'https://m.media-amazon.com/images/I/91m0fktyyCL._AC_SY606_.jpg',
+    avatar: 'https://i.pinimg.com/474x/6d/5c/fa/6d5cfa6e98a4d9231fbc11ab8dc0dae3.jpg',
     house: 'Hufflepuff',
     details: {
       patronus: 'Otter',
