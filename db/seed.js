@@ -44,13 +44,33 @@ async function seed() {
     const user = await User.create(userData)
     console.log(`${user.length} User added to the database`)
 
+  
+    eventData.forEach(event => {
+      console.log('adding users to events')
+      event.attendees = user.map(user => {
+        return user.id
+      })
+    })    
+
     const event = await Event.create(eventData)
     console.log(`${event.length} Event added to the database`)
 
-    
+    groupData.forEach(group => {
+      console.log('adding users to groups')
+      group.members = user.map(user => {
+        return user.id
+      })
+    })
 
     const group = await Group.create(groupData)
     console.log(`${group.length} Group added to the database`)
+
+    onlineEventData.forEach(onlineEvent => {
+      console.log('addings users to online events')
+      onlineEvent.attendees = user.map(user => {
+        return user.id
+      })
+    })
 
     const onlineEvent = await OnlineEvent.create(onlineEventData)
     console.log(`${onlineEvent.length} Online Event added to the database`)
