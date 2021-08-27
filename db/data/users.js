@@ -33,7 +33,7 @@ export default [
     email: 'LoonyLuna@email.com',
     password: 'LoonyLuna',
     passwordConfirmation: 'LoonyLuna',
-    avatar: 'https://favim.com/orig/201106/02/cute-funny-harry-potter-luna-lovegood-order-of-the-phoenix-Favim.com-63569.jpg',
+    avatar: 'https://www.syfy.com/sites/syfy/files/2019/04/luna_lovegood.jpg',
     house: 'Ravenclaw',
     details: {
       patronus: 'Hare',
@@ -60,7 +60,7 @@ export default [
     email: 'Hagrid200@email.com',
     password: 'Hagrid200',
     passwordConfirmation: 'Hagrid200',
-    avatar: 'https://ih1.redbubble.net/image.1774175145.0524/st,small,507x507-pad,600x600,f8f8f8.jpg',
+    avatar: 'https://i.ytimg.com/vi/h1y8noIb1AA/maxresdefault.jpg',
     house: 'Gryffindor',
     details: {
       patronus: 'Horse',
@@ -86,7 +86,7 @@ export default [
     email: 'BellaLestrange@email.com',
     password: 'BellaLestrange',
     passwordConfirmation: 'BellaLestrange',
-    avatar: 'https://static1.thegamerimages.com/wordpress/wp-content/uploads/2018/09/bellatrix-body-2.jpg',
+    avatar: 'https://static3.srcdn.com/wordpress/wp-content/uploads/2018/09/Bellatrix-Lestrange-Deahtly-Hallows-Tattoo.jpg',
     house: 'Slytherin',
     details: {
       patronus: 'Wolf',
