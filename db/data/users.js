@@ -182,6 +182,78 @@ export default [
       pet: 'owl',
       favoriteSubject: 'potions',
     },
+  },
+  {
+    username: 'DMaeDub',
+    email: 'delilah@mag.com',
+    password: 'pass',
+    passwordConfirmation: 'pass',
+    avatar: 'https://www.dictionary.com/e/wp-content/uploads/2021/03/20210303_atw_woman_800x800_png_-700x700.jpeg',
+    house: 'Ravenclaw',
+    details: {
+      patronus: 'horse',
+      wand: {
+        core: 'unicorn hair tail',
+        wood: 'maple',
+      },
+      friends: [
+        ''
+      ],
+      foes: [
+        'Tom Riddle'
+      ],
+      animagus: 'rat',
+      pet: 'owl',
+      favoriteSubject: 'potions',
+    },
+  },
+  {
+    username: 'CAnnDub',
+    email: 'chloe@mag.com',
+    password: 'pass',
+    passwordConfirmation: 'pass',
+    avatar: 'https://cms-tc.pbskids.org/parents/_pbsKidsForParentsSixteenNineRatioMedium/GettyImages-1230162704.jpg?mtime=20210113144127',
+    house: 'Hufflepuff',
+    details: {
+      patronus: 'unicorn',
+      wand: {
+        core: 'unicorn hair tail',
+        wood: 'maple',
+      },
+      friends: [
+        ''
+      ],
+      foes: [
+        'Tom Riddle'
+      ],
+      animagus: 'rat',
+      pet: 'owl',
+      favoriteSubject: 'potions',
+    },
+  },
+  {
+    username: 'jdub7575',
+    email: 'joe@mag.com',
+    password: 'pass',
+    passwordConfirmation: 'pass',
+    avatar: 'hhttps://www.irishtimes.com/polopoly_fs/1.3917964.1559891031!/image/image.jpg_gen/derivatives/box_620_330/image.jpg',
+    house: 'gryffindor',
+    details: {
+      patronus: 'unicorn',
+      wand: {
+        core: 'unicorn hair tail',
+        wood: 'maple',
+      },
+      friends: [
+        ''
+      ],
+      foes: [
+        'Tom Riddle'
+      ],
+      animagus: 'rat',
+      pet: 'owl',
+      favoriteSubject: 'potions',
+    },
   }
 
 ]

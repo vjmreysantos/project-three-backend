@@ -46,7 +46,6 @@ async function seed() {
 
   
     eventData.forEach(event => {
-      console.log('adding users to events')
       event.attendees = user.map(user => {
         return user.id
       })
@@ -56,7 +55,6 @@ async function seed() {
     console.log(`${event.length} Event added to the database`)
 
     groupData.forEach(group => {
-      console.log('adding users to groups')
       group.members = user.map(user => {
         return user.id
       })
@@ -66,7 +64,6 @@ async function seed() {
     console.log(`${group.length} Group added to the database`)
 
     onlineEventData.forEach(onlineEvent => {
-      console.log('addings users to online events')
       onlineEvent.attendees = user.map(user => {
         return user.id
       })
